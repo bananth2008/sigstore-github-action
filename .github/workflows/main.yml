@@ -62,6 +62,7 @@ jobs:
       - name: "Sign the image"  
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+        shell: bash  
         run: cosign sign --key cosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
         
       
