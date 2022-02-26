@@ -51,17 +51,15 @@ jobs:
           push: true
           tags: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
       
-      - name: "Generate the signing key"
-        run: 'echo "$KEY" > cosign.key'
-        shell: bash
-        env: 
-          KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
-        
+    
           
       - name: "Sign the image"
         env:
          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-        run: cosign sign --key cosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
+         COSIGN_KEY: ${{secrets.COSIGN_KEY}}
+        run: |
+          echo ${COSIGN_KEY} > cosign.key && \
+          cosign sign --key cosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
        
       
           
