@@ -52,7 +52,7 @@ jobs:
           tags: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
       
       - name: "Generate the signing key"
-        run: 'echo "${KEY}" > cosign.key'
+        run: 'echo "$KEY" > cosign.key'
         shell: bash
         env: 
           KEY: ${{secrets.COSIGN_KEY}}
