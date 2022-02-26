@@ -54,7 +54,7 @@ jobs:
       - name: "Sign the image"
         run: |
           echo ${COSIGN_KEY} > /tmp/mycosign.key && \
-          cosign sign --key /tmp/mycosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github:run_id}}
+          cosign sign --key /tmp/mycosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
         env:
           COSIGN_KEY: ${{secrets.COSIGN_KEY}}
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
