@@ -53,17 +53,15 @@ jobs:
       - name: "Install Cosign"
         uses: sigstore/cosign-installer@main
         
-      - name: "Write Key to disk"
-        run: 'echo "$KEY" > cosign.key'
-        shell: bash
-        env:
-          KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
           
       - name: "Sign the image"  
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-        
-        run: cosign sign --key cosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
+          COSIGN_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
+          TAGS: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
+        run: |
+          echo ${COSIGN_KEY} > /tmp/mycosign.key && \
+          cosign sign --key /tmp/mycosign.key ${TAGS}
         
       
           
