@@ -57,7 +57,6 @@ jobs:
         env:
          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
          COSIGN_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
-        shell: bash 
         run: |
           echo ${COSIGN_KEY} > /tmp/my_cosign.key && \
           cosign sign --key /tmp/my_cosign.key ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
