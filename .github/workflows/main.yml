@@ -61,7 +61,7 @@ jobs:
           TAGS: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
         
         run: |
-          echo ${{COSIGN_PRIVATE_KEY}} > cosign.key && \
+          echo ${COSIGN_KEY}} > cosign.key && \
           cosign sign --key cosign.key ${TAGS}
         
       
