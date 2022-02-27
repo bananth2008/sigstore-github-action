@@ -55,14 +55,14 @@ jobs:
         
       - name: "Create cosign key"  
         env:
-          COSIGN_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
+          COSIGN_KEY: ${{env.COSIGN_PRIVATE_KEY}}
         run: echo "$COSIGN_KEY" > cosign.key
           
         
           
       - name: "Sign the image"  
         env:
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+          COSIGN_PASSWORD: ${{env.COSIGN_PASSWORD}}
           TAGS: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
         run: cosign sign --key cosign.key ${TAGS}
         
