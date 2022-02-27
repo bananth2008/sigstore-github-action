@@ -60,8 +60,8 @@ jobs:
           COSIGN_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
           TAGS: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
         run: |
-          echo '${COSIGN_KEY}' > cosign.key && \
-          cosign sign --key cosign.key '${TAGS}'
+          echo ${COSIGN_KEY} > /tmp/my_cosign.key && \
+          cosign sign --key /tmp/my_cosign.key ${TAGS}
         
       
         
