@@ -56,12 +56,8 @@ jobs:
       - name: "Create cosign key"  
         env:
           COSIGN_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
-        run: |
-          echo ${COSIGN_KEY} && \
-          echo ${{secrets.COSIGN_PRIVATE_KEY}} && \
-          echo ${COSIGN_KEY} > cosign.key
-          
-        
+        shell: bash
+        run: 'echo "$COSIGN_KEY" > cosign.key'
           
       - name: "Sign the image"  
         env:
