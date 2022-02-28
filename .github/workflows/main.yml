@@ -63,7 +63,8 @@ jobs:
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
           TAGS: ${{env.REGISTRY}}/${{secrets.username}}/${{env.IMAGE_NAME}}:${{github.run_id}}
-        run: cosign sign --key cosign.key ${TAGS}
+        shell: bash  
+        run: 'cosign sign --key cosign.key "$TAGS"'
         
       
         
